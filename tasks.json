@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "text": "Executed shell command: git --no-pager log",
+    "done": true
+  },
+  {
+    "id": 2,
+    "text": "Drafted email to accountsupport@google.com regarding 'Request to Delete Account Data'",
+    "done": true
+  },
+  {
+    "id": 3,
+    "text": "Drafted email to [music.teacher.email@domain.com] regarding 'Request for Essay Exemption'",
+    "done": true
+  },
+  {
+    "id": 4,
+    "text": "Drafted email to [boss.email@domain.com] regarding 'Unavailability Tomorrow'",
+    "done": true
+  }
+]

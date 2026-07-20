@@ -65,6 +65,8 @@ Modify config.py to adjust assistant properties:
 * `OLLAMA_HOST`: The connection URI for the local Ollama instance.
 * `CONFIRM_SHELL_COMMANDS`: Set to True to ensure the agent asks for authorization before executing command line actions.
 
+Note: The compiled release executable (.exe) is strictly set to use the `qwen3:8b` model, and shell command execution is locked to always require explicit user confirmation. Modifying config.py configuration settings only affects runs executed directly from the source code.
+
 ### Discord Bot Configuration
 To use the optional Discord bot integration:
 1. Create a bot application on the Discord Developer Portal.

@@ -1,6 +1,10 @@
-README.md
+[Rr][Ee][Aa][Dd][Mm][Ee]*
 .venv/
 __pycache__/
 *.pyc
 credentials/
 .env
+dist/
+build/
+*.spec
+gitbook_content.txt
