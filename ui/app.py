@@ -125,32 +125,30 @@ class MessageRichLog(RichLog):
         self._drag_start = None
         self._drag_current = None
 
-    def _on_mouse_down(self, event: events.MouseEvent) -> None:
-        super()._on_mouse_down(event)
+    def on_mouse_down(self, event: events.MouseDown) -> None:
         if event.button == 1:
             region = self.content_region
             content_x = int(event.screen_x - region.x) if event.screen_x is not None else int(event.x)
             content_y = int(event.screen_y - region.y) if event.screen_y is not None else int(event.y)
-            
+
             line_index = int(content_y + self.scroll_y)
             if not self.lines:
                 self._drag_start = None
                 self._drag_current = None
                 return
-            
+
             line_index = max(0, min(len(self.lines) - 1, line_index))
             char_offset = max(0, min(len(self.lines[line_index].text), content_x))
             self._drag_start = (line_index, char_offset)
             self._drag_current = (line_index, char_offset)
             self.refresh()
 
-    def _on_mouse_move(self, event: events.MouseEvent) -> None:
-        super()._on_mouse_move(event)
+    def on_mouse_move(self, event: events.MouseMove) -> None:
         if event.button == 1 and self._drag_start is not None:
             region = self.content_region
             content_x = int(event.screen_x - region.x) if event.screen_x is not None else int(event.x)
             content_y = int(event.screen_y - region.y) if event.screen_y is not None else int(event.y)
-            
+
             line_index = int(content_y + self.scroll_y)
             if self.lines:
                 line_index = max(0, min(len(self.lines) - 1, line_index))
@@ -158,25 +156,24 @@ class MessageRichLog(RichLog):
                 self._drag_current = (line_index, char_offset)
                 self.refresh()
 
-    def _on_mouse_up(self, event: events.MouseEvent) -> None:
-        super()._on_mouse_up(event)
+    def on_mouse_up(self, event: events.MouseUp) -> None:
         if event.button == 1 and self._drag_start is not None:
             region = self.content_region
             content_x = int(event.screen_x - region.x) if event.screen_x is not None else int(event.x)
             content_y = int(event.screen_y - region.y) if event.screen_y is not None else int(event.y)
-            
+
             line_index = int(content_y + self.scroll_y)
             if self.lines:
                 end_line = max(0, min(len(self.lines) - 1, line_index))
                 end_char = max(0, min(len(self.lines[end_line].text), content_x))
-                
+
                 start_line, start_char = self._drag_start
-                
+
                 selected_text = self._get_text_range(start_line, start_char, end_line, end_char)
                 if selected_text:
                     self.app.copy_to_clipboard(selected_text)
                     self.app.notify("Copied to clipboard", timeout=2.0)
-            
+
             self._drag_start = None
             self._drag_current = None
             self.refresh()
